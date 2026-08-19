@@ -15,7 +15,7 @@ fi
 COMMAND="$1"
 ARG2="$2"
 shift 2
-SCRIPT="${BIN_DIR}/${COMMAND}-${ARG2}.sh"
+SCRIPT="${BIN_DIR}/${COMMAND}/${ARG2}.sh"
 
 if [[ ! -f "$SCRIPT" ]]; then
   echo "Script not found: $SCRIPT" >&2
@@ -23,8 +23,11 @@ if [[ ! -f "$SCRIPT" ]]; then
 fi
 
 case "$COMMAND" in
-  install|update|uninstall|list)
+  install|update|uninstall)
     exec bash "$SCRIPT" "$@"
+    ;;
+  list)
+    cat /opt/toolkits/config/apps.txt
     ;;
   *)
     echo "Unknown command: $COMMAND" >&2
