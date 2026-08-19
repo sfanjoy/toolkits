@@ -1,2 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+BIN_DIR="/opt/toolkits/bin"
+
+usage() {
+  echo "Usage: tks <install|update|uninstall|list> <arg2>" >&2
+  exit 1
+}
+
+if [[ $# -ne 2 ]]; then
+  usage
+fi
+
+COMMAND="$1"
+ARG2="$2"
+
+case "$COMMAND" in
+  install|update|uninstall|list) ;;
+  *)
+    echo "Unknown command: $COMMAND" >&2
+    usage
+    ;;
+esac
+
+SCRIPT="${BIN_DIR}/${COMMAND}-${ARG2}.sh"
+
+if [[ ! -f "$SCRIPT" ]]; then
+  echo "Script not found: $SCRIPT" >&2
+  exit 1
+fi
+
+exec bash "$SCRIPT"
