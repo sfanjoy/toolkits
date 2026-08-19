@@ -10,4 +10,4 @@ if [[ ! -d "$pkg" ]]; then
   exit 1
 fi
 
-rpm puild -bb "$root/config/rpm/Stream.spec"
+rpmbuild -bb $root/config/Stream.spec
