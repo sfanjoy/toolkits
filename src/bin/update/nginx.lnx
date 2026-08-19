@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usermod -aG morty nginx
+mkdir -p /usr/share/nginx/html/ln-logs
+chown -R morty:nginx /usr/share/nginx/html/ln-logs
+mkdir -p /usr/share/nginx/html/ln-www
+chown -R morty:nginx /usr/share/nginx/html/ln-www
+TDAY=`date "+%Y%m%d-%s"`
+mv -f /etc/nginx/nginx.conf /etc/nginx/nginx.conf.$TDAY
+cp /root/config/etc/nginx/nginx.conf.$2 /etc/nginx/nginx.conf
+cp /root/config/etc/nginx/sites-available/localnotion_api.$2 /etc/nginx/sites-available/localnotion_api
+cp /root/config/etc/nginx/sites-available/localnotion_app.$2 /etc/nginx/sites-available/localnotion_app
+cp /root/config/etc/nginx/sites-available/localnotion_log.$2 /etc/nginx/sites-available/localnotion_log
+cp /root/config/etc/nginx/sites-available/localnotion_webhooks.$2 /etc/nginx/sites-available/localnotion_webhooks
+systemctl restart nginx
+systemctl status nginx --no-pager
