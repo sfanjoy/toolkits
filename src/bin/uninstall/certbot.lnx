@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+snap uninstall --classic certbot
+dnf -y uninstall snapd

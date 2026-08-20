@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# https://snapcraft.io/docs/installing-snap-on-centos
+dnf -y install epel-release
+dnf -y install snapd
+systemctl enable --now snapd.socket
+ln -s /var/lib/snapd/snap /snap
+systemctl start snapd
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo "Usage: tks certbot <command> <args...>" >&2
+  echo "       tks certbot makecerts" >&2
+  exit 1
+}
+
+if [ $1 == "makecerts" ]; then
+  echo $1
+else
+  usage
+fi
