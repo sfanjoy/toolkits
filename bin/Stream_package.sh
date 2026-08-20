@@ -10,4 +10,8 @@ if [[ ! -d "$pkg" ]]; then
   exit 1
 fi
 
+# Copy Basic Configurations
+cp $root/config/nginx.conf pkg/config
+
+# Package the Base
 rpmbuild -bb $root/config/Stream.spec
