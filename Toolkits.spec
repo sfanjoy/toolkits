@@ -7,8 +7,8 @@
 #
 # Pre-amble
 #
-Summary: Configuration and Admin script for linux servers
-Name:  %(echo %APP_NAME)-fAloha
+Summary: Configuration and Admin script for CentOS Stream servers
+Name:  %(echo %APP_NAME)
 Version: %(echo %APP_VERSION)
 Release: 1
 Group: fAloha Applications
@@ -19,7 +19,7 @@ ExclusiveArch: x86_64
 Requires: shadow-utils
 #
 %description
-Configuration and Admin scripts for Local Notion Servers
+Configuration and Admin scripts for CentOS Stream servers
 
 %prep
 # current dir is RPM_BUILD_DIR
@@ -27,8 +27,7 @@ rm -rf $RPM_BUILD_DIR/Toolkits
 # clean up any previous failed builds
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT
-cp -r $HOME/projects/toolkits/pkg .
-mv pkg toolkits
+git clone git@github.com:sfanjoy/toolkits.git
 
 %build
 # current dir is RPM_BUILD_DIR
